@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggler } from "@/components/ThemeToggler";
 import LiquidEther from "@/components/background/LiquidEther";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,34 +21,36 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn("antialiased")}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div className="fixed top-4 right-4 z-50">
-            <ThemeToggler />
-          </div>
-          <div className="fixed inset-0 -z-10">
-            <LiquidEther
-              colors={["#5227FF", "#FF9FFC", "#B19EEF"]}
-              isViscous={true}
-              viscous={60}
-              iterationsViscous={32}
-              iterationsPoisson={32}
-              resolution={0.5}
-              isBounce={false}
-              autoDemo={true}
-              autoSpeed={0.2}
-              autoIntensity={2.2}
-              takeoverDuration={0.25}
-              autoResumeDelay={3000}
-              autoRampDuration={0.6}
-            />
-          </div>
-          {children}
-        </ThemeProvider>
+        <Suspense fallback={<div>Loading... </div>}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <div className="fixed top-4 right-4 z-50">
+              <ThemeToggler />
+            </div>
+            <div className="fixed inset-0 -z-10">
+              <LiquidEther
+                colors={["#5227FF", "#FF9FFC", "#B19EEF"]}
+                isViscous={true}
+                viscous={60}
+                iterationsViscous={32}
+                iterationsPoisson={32}
+                resolution={0.5}
+                isBounce={false}
+                autoDemo={true}
+                autoSpeed={0.2}
+                autoIntensity={2.2}
+                takeoverDuration={0.25}
+                autoResumeDelay={0}
+                autoRampDuration={0.6}
+              />
+            </div>
+            {children}
+          </ThemeProvider>
+        </Suspense>
       </body>
     </html>
   );
