@@ -48,7 +48,6 @@ export default function RadialMenu() {
                   key={feature.id}
                   path={path}
                   i={i}
-                  label={feature.title}
                   cx={0}
                   cy={0}
                   startAngle={start}
