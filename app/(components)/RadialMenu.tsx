@@ -1,31 +1,25 @@
+"use client";
 import { Dialog } from "@/components/ui/dialog";
 import RadialItem from "./RadialItem";
 import FeatureDialog from "./FeatureDialog";
-import { DialogTrigger } from "@radix-ui/react-dialog";
+import { Feature } from "@/types/types";
+import { useFeatureStore } from "@/store/useFeatureStore";
 
 function polarToCartesian(angle: number, r: number) {
   return [Math.cos(angle) * r, Math.sin(angle) * r];
 }
 
-const featuresData: any[] = [
-  {
-    title: "Feature 1",
-  },
-  {
-    title: "Feature 2",
-  },
-  {
-    title: "Feature 3",
-  },
-];
+
 
 export default function RadialMenu() {
-  const sliceAngle = (2 * Math.PI) / featuresData.length;
+  const { activeFeature, featuresData, closeModal } = useFeatureStore();
+
+  const sliceAngle = (2 * Math.PI) / Object.keys(featuresData).length;
   const innerRadius = 100;
   const outerRadius = 200;
 
   return (
-    <Dialog>
+    <Dialog  open={!!activeFeature} onOpenChange={(open) => !open && closeModal()}>
       <div className="w-full h-screen flex items-center justify-center">
         <svg
           width={850}
@@ -52,7 +46,7 @@ export default function RadialMenu() {
 
             return (
                 <RadialItem
-                  key={i}
+                  key={feature.id}
                   path={path}
                   i={i}
                   label={feature.title}
@@ -62,12 +56,13 @@ export default function RadialMenu() {
                   endAngle={end}
                   innerR={innerRadius}
                   outerR={outerRadius}
+                  feature={feature}
                 />
             );
           })}
         </svg>
       </div>
-      <FeatureDialog>{featuresData[0].title}</FeatureDialog>
+      <FeatureDialog></FeatureDialog>
     </Dialog>
   );
 }
