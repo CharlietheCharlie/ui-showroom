@@ -2,7 +2,6 @@
 import { cn } from "@/lib/utils";
 import { useFeatureStore } from "@/store/useFeatureStore";
 import { Feature } from "@/types/types";
-import { DialogTrigger } from "@radix-ui/react-dialog";
 import { motion } from "framer-motion";
 import { useCallback, useState } from "react";
 

@@ -2,7 +2,6 @@
 import { Dialog } from "@/components/ui/dialog";
 import RadialItem from "./RadialItem";
 import FeatureDialog from "./FeatureDialog";
-import { Feature } from "@/types/types";
 import { useFeatureStore } from "@/store/useFeatureStore";
 
 function polarToCartesian(angle: number, r: number) {

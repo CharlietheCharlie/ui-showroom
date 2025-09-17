@@ -34,7 +34,7 @@ jobs:
           node-version: 20
           cache: 'npm'
       - run: npm ci
-      - run: npm run test:unit -- --coverage
+      - run: npm run test:unit
       - uses: actions/upload-artifact@v4
         with:
           name: vitest-coverage
