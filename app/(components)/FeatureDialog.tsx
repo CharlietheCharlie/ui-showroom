@@ -8,7 +8,7 @@ import { useFeatureStore } from "@/store/useFeatureStore";
 import { Suspense } from "react";
 
 export default function FeatureDialog() {
-  const { activeFeature, closeModal } = useFeatureStore();
+  const { activeFeature} = useFeatureStore();
 
   // From the active feature data, get the component to render
   const FeatureComponent = activeFeature?.component;
@@ -19,7 +19,6 @@ export default function FeatureDialog() {
         <DialogTitle className="text-2xl">{activeFeature?.title}</DialogTitle>
         <DialogClose
           className="absolute top-4 right-4 text-muted-foreground"
-          onClick={closeModal}
         >
           close
         </DialogClose>
