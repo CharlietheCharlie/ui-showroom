@@ -58,10 +58,6 @@ jobs:
 
       # Build and start app in background
       - run: npm run build
-      - run: npm run start &
-
-      # Give server some time to boot
-      - run: npx wait-on http://localhost:3000
 
       # Run Playwright
       - run: npx playwright test --reporter=html
