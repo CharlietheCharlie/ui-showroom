@@ -18,6 +18,10 @@ const eslintConfig = [
       "out/**",
       "build/**",
       "next-env.d.ts",
+      // ignore installed packages
+      "components/TargetCursor.tsx",
+      "components/GlassSurface.tsx",
+      "components/background/LiquidEther.tsx",
     ],
   },
 ];

@@ -8,7 +8,6 @@ import { useCallback, useState } from "react";
 export default function RadialItem({
   path,
   i,
-  label,
   cx,
   cy,
   startAngle,
@@ -19,7 +18,6 @@ export default function RadialItem({
 }: {
   path: string;
   i: number;
-  label: string;
   cx: number; // 圓心 X
   cy: number; // 圓心 Y
   startAngle: number;

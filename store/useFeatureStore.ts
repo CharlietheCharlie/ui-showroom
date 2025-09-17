@@ -4,7 +4,7 @@ import { create } from "zustand";
 
 type FeatureState = {
   viewedAt?: Date;
-  data?: any;
+  data?: object;
 };
 
 type FeatureStore = {

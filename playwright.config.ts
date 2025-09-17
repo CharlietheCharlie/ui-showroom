@@ -1,11 +1,17 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices } from "@playwright/test";
 
 // Base URL to use in actions like `await page.goto('/')`
-const baseURL = 'http://localhost:3000';
+const baseURL = "http://localhost:3000";
 
 export default defineConfig({
   // Directory where the tests are located
-  testDir: './tests/e2e',
+  testDir: "./tests/e2e",
+  testIgnore: [
+    // ignore installed packages
+    "components/TargetCursor.tsx",
+    "components/GlassSurface.tsx",
+    "components/background/LiquidEther.tsx",
+  ],
 
   // Fail the build on CI if you accidentally left test.only in the source code.
   forbidOnly: !!process.env.CI,
@@ -17,35 +23,35 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
 
   // Reporter to use. See https://playwright.dev/docs/test-reporters
-  reporter: 'html',
+  reporter: "html",
 
   use: {
     // Base URL to use in actions like `await page.goto('/')`.
     baseURL,
 
     // Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer
-    trace: 'on-first-retry',
+    trace: "on-first-retry",
   },
 
   // Configure projects for major browsers
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: "chromium",
+      use: { ...devices["Desktop Chrome"] },
     },
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      name: "firefox",
+      use: { ...devices["Desktop Firefox"] },
     },
     {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      name: "webkit",
+      use: { ...devices["Desktop Safari"] },
     },
   ],
 
   // Run your local dev server before starting the tests
   webServer: {
-    command: 'npm run dev',
+    command: "npm run dev",
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000, // 2 minutes to start
