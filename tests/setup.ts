@@ -3,3 +3,9 @@
 // For example: expect(element).toBeInTheDocument();
 
 import '@testing-library/jest-dom/vitest';
+import ResizeObserver from 'resize-observer-polyfill';
+import { vi } from 'vitest';
+
+// Mock ResizeObserver globally
+vi.stubGlobal('ResizeObserver', ResizeObserver);
+
