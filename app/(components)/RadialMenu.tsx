@@ -3,6 +3,9 @@ import { Dialog } from "@/components/ui/dialog";
 import RadialItem from "./RadialItem";
 import FeatureDialog from "./FeatureDialog";
 import { useFeatureStore } from "@/store/useFeatureStore";
+import dynamic from "next/dynamic";
+const MyIcon = dynamic(() => import("@/components/MyIcon"), { ssr: false });
+
 
 function polarToCartesian(angle: number, r: number) {
   return [Math.cos(angle) * r, Math.sin(angle) * r];
@@ -19,6 +22,9 @@ export default function RadialMenu() {
 
   return (
     <Dialog  open={!!activeFeature} onOpenChange={(open) => !open && closeModal()}>
+       <div className="size-40 md:size-60 lg:size-80 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+        <MyIcon />
+      </div>
       <div className="w-full h-screen flex items-center justify-center">
         <svg
           width={850}
