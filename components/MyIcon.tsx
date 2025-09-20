@@ -15,9 +15,9 @@ function LogoModel() {
   const scene = useGLTF("/my-icon.glb");
 
   useEffect(() => {
-    scene.scene.traverse((child: any) => {
-      if ((child as any).geometry) {
-        (child as any).material = new THREE.MeshStandardMaterial({
+    scene.scene.traverse((child: THREE.Object3D) => {
+      if (child instanceof THREE.Mesh && (child).geometry) {
+        (child).material = new THREE.MeshStandardMaterial({
           color: "silver",
           metalness: 0.9, // 越接近 1 越金屬
           roughness: 0.2, // 越接近 0 越光滑
