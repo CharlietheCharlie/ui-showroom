@@ -30,8 +30,8 @@ export default function RootLayout({
               <ThemeToggler />
             </div>
             <div className="fixed inset-0 -z-10">
-              {/* Only render this component in non-CI environments */}
-              {/* {!process.env.CI && ( */}
+              {/* Only render this component in non-GitHub-Actions environments */}
+              {!process.env.GITHUB_ACTIONS && (
                 <ClientOnlyLiquidEther
                   colors={["#5227FF", "#FF9FFC", "#B19EEF"]}
                   mouseForce={20}
@@ -44,7 +44,7 @@ export default function RootLayout({
                   autoSpeed={0.2}
                   autoIntensity={2.2}
                 />
-              {/* )} */}
+              )}
             </div>
             {children}
           </ThemeProvider>
