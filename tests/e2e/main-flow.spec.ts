@@ -39,3 +39,27 @@ test.describe("Main User Flow", () => {
     await expect(dialog).not.toBeVisible();
   });
 });
+
+
+
+test.describe("Target Cursor - Desktop", () => {
+  test.use({ viewport: { width: 1280, height: 720 } });
+
+  test("should show target cursor", async ({ page }) => {
+    await page.goto("/");
+    await page.mouse.move(100, 100); // Move mouse to trigger cursor
+    const targetCursor = page.locator("[data-testid='target-cursor']");
+    await expect(targetCursor).toHaveCount(1);
+  });
+});
+
+test.describe("Target Cursor - Mobile", () => {
+  test.use({ viewport: { width: 768, height: 667 } });  // limit is 768px
+
+  test("should NOT show target cursor", async ({ page }) => {
+    await page.goto("/");
+    await page.mouse.move(100, 100); // Move mouse to trigger cursor
+    const targetCursor = page.locator("[data-testid='target-cursor']");
+    await expect(targetCursor).toHaveCount(0);
+  });
+});
