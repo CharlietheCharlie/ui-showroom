@@ -3,7 +3,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggler } from "@/components/ThemeToggler";
-import LiquidEther from "@/components/background/LiquidEther";
+// import LiquidEther from "@/components/background/LiquidEther";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
