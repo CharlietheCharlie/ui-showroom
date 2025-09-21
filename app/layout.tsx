@@ -3,7 +3,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggler } from "@/components/ThemeToggler";
-// import LiquidEther from "@/components/background/LiquidEther";
+import ClientOnlyLiquidEther from "@/components/background/ClientOnlyLiquidEther";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
@@ -30,7 +30,7 @@ export default function RootLayout({
               <ThemeToggler />
             </div>
             <div className="fixed inset-0 -z-10">
-              {/* <LiquidEther
+              <ClientOnlyLiquidEther
                 colors={["#5227FF", "#FF9FFC", "#B19EEF"]}
                 isViscous={true}
                 viscous={60}
@@ -44,7 +44,7 @@ export default function RootLayout({
                 takeoverDuration={0.25}
                 autoResumeDelay={0}
                 autoRampDuration={0.6}
-              /> */}
+              />
             </div>
             {children}
           </ThemeProvider>
