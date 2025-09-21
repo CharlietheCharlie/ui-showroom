@@ -65,21 +65,14 @@ jobs:
       # Build app (不用手動 start，Playwright config 裡 webServer 會自己啟動)
       - run: npm run build
 
-      # --- DEBUGGING STEP ---
-      # The following step directly runs the start command in the foreground.
-      # It is EXPECTED to hang and fail the CI job.
-      # Its only purpose is to print any server startup errors to the CI logs.
-      - name: DEBUG - See server startup logs
-        run: npm run start
+      # Run Playwright tests
+      - run: npx playwright test --reporter=html
 
-      # The original test command is temporarily disabled for debugging.
-      # - run: npx playwright test --reporter=html
-
-      # The original report upload is temporarily disabled.
-      # - uses: actions/upload-artifact@v4
-      #   with:
-      #     name: playwright-report
-      #     path: playwright-report
+      # Save HTML report
+      - uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report
 
   # ----------------------------
   # 4. Merge checks
