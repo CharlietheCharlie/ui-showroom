@@ -7,8 +7,8 @@ test.describe("Main User Flow", () => {
     // 1. Navigate to the homepage
     await page.goto("/");
 
-    // Wait for the initial animations to settle if necessary
-    await page.waitForTimeout(1000); // Adjust as needed
+    // Diagnostic step: Check if the page loaded correctly by verifying its title
+    await expect(page).toHaveTitle("Create Next App");
 
     // 2. Find and click the button for "Feature 2"
     const featureButton = page.getByText("Feature 2");
