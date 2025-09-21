@@ -30,7 +30,7 @@ export default function RootLayout({
               <ThemeToggler />
             </div>
             <div className="fixed inset-0 -z-10">
-              <LiquidEther
+              {/* <LiquidEther
                 colors={["#5227FF", "#FF9FFC", "#B19EEF"]}
                 isViscous={true}
                 viscous={60}
@@ -44,7 +44,7 @@ export default function RootLayout({
                 takeoverDuration={0.25}
                 autoResumeDelay={0}
                 autoRampDuration={0.6}
-              />
+              /> */}
             </div>
             {children}
           </ThemeProvider>
