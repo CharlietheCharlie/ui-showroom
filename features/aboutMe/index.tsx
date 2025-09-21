@@ -13,9 +13,7 @@ export default function AboutMe() {
         }
       </p>
       <p>
-        {
-          "Feel free to reach out if you'd like to connect or collaborate on a project!"
-        }
+        {"Feel free to reach out if you'd like to connect oxr collaborate on a project!"}
       </p>
     </div>
   );
