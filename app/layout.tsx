@@ -30,21 +30,24 @@ export default function RootLayout({
               <ThemeToggler />
             </div>
             <div className="fixed inset-0 -z-10">
-              <ClientOnlyLiquidEther
-                colors={["#5227FF", "#FF9FFC", "#B19EEF"]}
-                isViscous={true}
-                viscous={60}
-                iterationsViscous={32}
-                iterationsPoisson={32}
-                resolution={0.5}
-                isBounce={false}
-                autoDemo={true}
-                autoSpeed={0.2}
-                autoIntensity={2.2}
-                takeoverDuration={0.25}
-                autoResumeDelay={0}
-                autoRampDuration={0.6}
-              />
+              {/* Only render this component in non-CI environments */}
+              {!process.env.CI && (
+                <ClientOnlyLiquidEther
+                  colors={["#5227FF", "#FF9FFC", "#B19EEF"]}
+                  isViscous={true}
+                  viscous={60}
+                  iterationsViscous={32}
+                  iterationsPoisson={32}
+                  resolution={0.5}
+                  isBounce={false}
+                  autoDemo={true}
+                  autoSpeed={0.2}
+                  autoIntensity={2.2}
+                  takeoverDuration={0.25}
+                  autoResumeDelay={0}
+                  autoRampDuration={0.6}
+                />
+              )}
             </div>
             {children}
           </ThemeProvider>
