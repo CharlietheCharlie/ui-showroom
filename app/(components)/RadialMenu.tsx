@@ -22,7 +22,7 @@ export default function RadialMenu() {
 
   return (
     <Dialog open={!!activeFeature} onOpenChange={(open) => !open && closeModal()}>
-      <div className="relative w-full h-screen flex items-center justify-center">
+      <div className="relative w-full h-dvh flex items-center justify-center">
         {/* Icon Container */}
         <div className="size-40 md:size-60 lg:size-80 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
           <MyIcon />
