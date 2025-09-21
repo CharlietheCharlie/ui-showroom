@@ -53,12 +53,20 @@ jobs:
           cache: 'npm'
       - run: npm ci
 
+      # Cache Playwright browsers
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright
+
       # Install Playwright browsers
       - run: npx playwright install --with-deps
 
       # Build and start app in background
       - run: npm run build 
-      - run: npm run start
 
       # Run Playwright
       - run: npx playwright test --reporter=html
