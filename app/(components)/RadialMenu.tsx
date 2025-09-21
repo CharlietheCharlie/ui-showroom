@@ -21,11 +21,14 @@ export default function RadialMenu() {
   const outerRadius = 200;
 
   return (
-    <Dialog  open={!!activeFeature} onOpenChange={(open) => !open && closeModal()}>
-       <div className="size-40 md:size-60 lg:size-80 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-        <MyIcon />
-      </div>
-      <div className="w-full h-screen flex items-center justify-center">
+    <Dialog open={!!activeFeature} onOpenChange={(open) => !open && closeModal()}>
+      <div className="relative w-full h-screen flex items-center justify-center">
+        {/* Icon Container */}
+        <div className="size-40 md:size-60 lg:size-80 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+          <MyIcon />
+        </div>
+
+        {/* SVG Menu Container */}
         <svg
           width={850}
           height={850}
