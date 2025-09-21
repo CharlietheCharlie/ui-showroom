@@ -53,14 +53,19 @@ jobs:
           cache: 'npm'
       - run: npm ci
 
+      # Cache Playwright browsers
+      - uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
 
       # Install Playwright browsers
       - run: npx playwright install --with-deps
 
-      # Build and start app in background
-      - run: npm run build 
+      # Build app (不用手動 start，Playwright config 裡 webServer 會自己啟動)
+      - run: npm run build
 
-      # Run Playwright
+      # Run Playwright tests
       - run: npx playwright test --reporter=html
 
       # Save HTML report

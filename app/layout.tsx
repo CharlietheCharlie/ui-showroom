@@ -3,15 +3,8 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggler } from "@/components/ThemeToggler";
+import LiquidEther from "@/components/background/LiquidEther";
 import { Suspense } from "react";
-import dynamic from "next/dynamic";
-
-const LiquidEther = dynamic(
-  () => import("@/components/background/LiquidEther"),
-  {
-    ssr: false,
-  }
-);
 
 export const metadata: Metadata = {
   title: "Create Next App",
