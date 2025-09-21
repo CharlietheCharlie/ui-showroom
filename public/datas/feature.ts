@@ -3,6 +3,14 @@ import { lazy } from "react";
 
 export const featuresData: Feature[] = [
   {
+    id: 0,
+    title: "About Me",
+    description:
+      "A brief introduction about myself, including my background, skills, and interests.",
+    techStack: ["React", "TypeScript", "CSS"],
+    component: lazy(() => import("@/features/aboutMe")),
+  },
+  {
     id: 1,
     title: "Infinite Scroll",
     description:
