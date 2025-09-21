@@ -44,7 +44,7 @@ export default function RadialItem({
       <motion.path
         d={path}
         className={cn(
-          "fill-white/5 stroke-white/20 hover:fill-primary/20",
+          "fill-white/10 stroke-white/20 hover:fill-primary/20",
           isTextHover && "fill-primary/30"
         )}
         initial={{ scale: 0, opacity: 0 }}

@@ -31,23 +31,20 @@ export default function RootLayout({
             </div>
             <div className="fixed inset-0 -z-10">
               {/* Only render this component in non-CI environments */}
-              {!process.env.CI && (
+              {/* {!process.env.CI && ( */}
                 <ClientOnlyLiquidEther
                   colors={["#5227FF", "#FF9FFC", "#B19EEF"]}
+                  mouseForce={20}
+                  cursorSize={100}
                   isViscous={true}
-                  viscous={60}
+                  viscous={30}
                   iterationsViscous={32}
                   iterationsPoisson={32}
                   resolution={0.5}
-                  isBounce={false}
-                  autoDemo={true}
                   autoSpeed={0.2}
                   autoIntensity={2.2}
-                  takeoverDuration={0.25}
-                  autoResumeDelay={0}
-                  autoRampDuration={0.6}
                 />
-              )}
+              {/* )} */}
             </div>
             {children}
           </ThemeProvider>
