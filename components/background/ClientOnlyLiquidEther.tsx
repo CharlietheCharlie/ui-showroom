@@ -8,11 +8,13 @@ const DynamicLiquidEther = dynamic(
   { ssr: false }
 );
 
+type Props = React.ComponentProps<typeof DynamicLiquidEther>;
+
 /**
  * This is a client-side-only wrapper component for LiquidEther.
  * It safely renders the component only in the browser, preventing SSR errors.
  * It passes all received props down to the original LiquidEther component.
  */
-export default function ClientOnlyLiquidEther(props: any) {
+export default function ClientOnlyLiquidEther(props: Props) {
   return <DynamicLiquidEther {...props} />;
 }
