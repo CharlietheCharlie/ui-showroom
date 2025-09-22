@@ -8,7 +8,7 @@ test.describe("Main User Flow", () => {
     await page.goto("/");
 
     // Diagnostic step: Check if the page loaded correctly by verifying its title
-    await expect(page).toHaveTitle("Create Next App");
+    await expect(page).toHaveTitle("Charlie's UI Showroom");
 
     // 2. Find and click the button for "Feature 2"
     const featureButton = page.getByText("Feature 2");

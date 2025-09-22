@@ -5,8 +5,8 @@ import RadialMenu from '@/app/(components)/RadialMenu';
 import { useFeatureStore } from '@/store/useFeatureStore';
 
 // Mock the feature components to avoid rendering complex, lazy-loaded components
-vi.mock('@/features/infiniteScroll', () => ({
-  default: () => <div>Mocked Infinite Scroll</div>,
+vi.mock('@/features/virtualScroll', () => ({
+  default: () => <div>Mocked Virtual Scroll</div>,
 }));
 
 vi.mock('@/features/FeatureTwoComponent', () => ({
@@ -32,7 +32,7 @@ describe('RadialMenu and FeatureDialog Integration', () => {
     const user = userEvent.setup(); // Setup userEvent
     render(<RadialMenu />);
 
-    const featureButton = screen.getByText('Infinite Scroll');
+    const featureButton = screen.getByText('Virtual Scroll');
     expect(featureButton).toBeInTheDocument();
 
     // Act: Click the button using userEvent
@@ -42,10 +42,10 @@ describe('RadialMenu and FeatureDialog Integration', () => {
     const dialog = await screen.findByRole('dialog');
     expect(dialog).toBeInTheDocument();
 
-    const dialogTitle = await screen.findByRole('heading', { name: 'Infinite Scroll' });
+    const dialogTitle = await screen.findByRole('heading', { name: 'Virtual Scroll' });
     expect(dialogTitle).toBeInTheDocument();
 
-    const featureContent = await screen.findByText('Mocked Infinite Scroll');
+    const featureContent = await screen.findByText('Mocked Virtual Scroll');
     expect(featureContent).toBeInTheDocument();
   });
 

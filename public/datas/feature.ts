@@ -12,11 +12,11 @@ export const featuresData: Feature[] = [
   },
   {
     id: 1,
-    title: "Infinite Scroll",
+    title: "Virtual Scroll",
     description:
       "A feature that allows users to load more content as they scroll down the page, providing a seamless browsing experience without the need for pagination.",
     techStack: ["React", "Intersection Observer API", "CSS"],
-    component: lazy(() => import("@/features/infiniteScroll")),
+    component: lazy(() => import("@/features/virtualScroll")),
   },
   {
     id: 2,
