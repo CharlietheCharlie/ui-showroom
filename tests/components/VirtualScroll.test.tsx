@@ -43,7 +43,7 @@ describe("VirtualizedInfiniteScroll", () => {
     queryClient.clear();
   });
 
-  const renderComponent = (loadMoreMock: any) =>
+  const renderComponent = (loadMoreMock: () => Promise<{ title: string }[]>) =>
     render(
       <QueryClientProvider client={queryClient}>
         <VirtualizedInfiniteScrollWrapper

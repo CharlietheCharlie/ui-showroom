@@ -1,11 +1,10 @@
 "use client";
-import { Suspense, use, useMemo, useRef, useState } from "react";
+import { Suspense,  useState } from "react";
 import { AnimatedItem } from "./AnimatedItem";
 import { cn } from "@/lib/utils";
 import { SkeletonArray } from "@/components/Skeleton";
 import CustomScrollbar from "@/components/CustomScrollbar";
 import {
-  useInfiniteQuery,
   useSuspenseInfiniteQuery,
 } from "@tanstack/react-query";
 import IntersectionTrigger from "@/components/IntersectionTrigger";
