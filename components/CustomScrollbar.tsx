@@ -43,7 +43,7 @@ export default function CustomScrollbar({
     const { scrollTop, scrollHeight, clientHeight } = el;
     const ratio = scrollTop / (scrollHeight - clientHeight);
     setThumbTop(ratio * (clientHeight - thumbHeight));
-    handleScroll && handleScroll(el);
+    if(handleScroll) handleScroll(el);
   };
 
   const onThumbPointerDown = (e: React.PointerEvent) => {
