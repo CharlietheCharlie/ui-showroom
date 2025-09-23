@@ -1,51 +1,123 @@
-
-import { render, screen, within } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
-import VirtualScrollFeature from '@/features/virtualScroll';
+import { render, screen, waitFor, within } from "@testing-library/react";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import VirtualizedInfiniteScrollWrapper from "@/features/virtualScroll/VirtualizedInfiniteScroll";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // Mock the AnimatedItem to render its children directly
-// This avoids dealing with motion and IntersectionObserver in unit tests
-vi.mock('@/features/virtualScroll/AnimatedItem', () => ({
-  AnimatedItem: ({ children }: { children: React.ReactNode }) => <div role="listitem">{children}</div>,
+vi.mock("@/features/virtualScroll/AnimatedItem", () => ({
+  AnimatedItem: ({ children }: { children: React.ReactNode }) => (
+    <div role="listitem">{children}</div>
+  ),
 }));
 
-describe('VirtualScrollFeature', () => {
-  it('should render the feature title and description', async () => {
-    render(<VirtualScrollFeature />);
-    
-    expect(screen.getByRole('heading', { name: /Virtual Scroll Component/i })).toBeInTheDocument();
-    expect(screen.getByText(/This is where the huge amount of list items are rendered/i)).toBeInTheDocument();
+// --- Mock IntersectionObserver ---
+const mockIntersectionObserver = vi.fn();
+vi.mock("@/components/IntersectionTrigger", () => ({
+  default: ({ onVisible }: { onVisible: () => void }) => {
+    mockIntersectionObserver(onVisible);
+    return <div data-testid="intersection-trigger" />;
+  },
+}));
 
-    // Wait for the component to finish its async updates to avoid act() warnings
-    expect(await screen.findByText('Item 1')).toBeInTheDocument();
+// Helper to generate items for our mock loadMore
+const generateMockItems = (count: number, page: number) =>
+  Array.from({ length: count }, (_, i) => ({
+    title: `Item ${count * (page - 1) + i + 1}`,
+  }));
+
+describe("VirtualizedInfiniteScroll", () => {
+  let queryClient: QueryClient;
+
+  beforeEach(() => {
+    queryClient = new QueryClient({
+      defaultOptions: {
+        queries: {
+          retry: false,
+        },
+      },
+    });
   });
 
-  it('should render the virtualized list with initial items', async () => {
-    render(<VirtualScrollFeature />);
-
-    // The component generates 100,000 items, but should only render a few.
-    // containerHeight={400} and itemHeight={80}, so visibleCount is 400/80 = 5.
-    // The component logic adds a buffer, so we expect a few more than 5.
-    const list = screen.getByRole('list');
-    
-    // Use `findAllByRole` which waits for elements to appear.
-    const items = await within(list).findAllByRole('listitem');
-    
-    // Check that only a small subset of items are rendered
-    expect(items.length).toBeGreaterThan(0);
-    expect(items.length).toBeLessThan(20); // A reasonable upper bound for virtualization
-
-    // Check if the first item is rendered correctly
-    expect(within(items[0]).getByText('Item 1')).toBeInTheDocument();
+  afterEach(() => {
+    mockIntersectionObserver.mockClear();
+    queryClient.clear();
   });
 
-  it('should not render items that are outside the initial visible range', async () => {
-    render(<VirtualScrollFeature />);
+  const renderComponent = (loadMoreMock: any) =>
+    render(
+      <QueryClientProvider client={queryClient}>
+        <VirtualizedInfiniteScrollWrapper
+          itemHeight={80}
+          containerHeight={400}
+          loadMore={loadMoreMock}
+        />
+      </QueryClientProvider>
+    );
 
-    // Wait for the list to populate before checking what's not there
-    await screen.findByText('Item 1');
+  it("should render only visible items on initial load", async () => {
+    const loadMoreMock = vi.fn().mockResolvedValue(generateMockItems(15, 1));
+    renderComponent(loadMoreMock);
 
-    // Item 50 should definitely not be in the DOM initially
-    expect(screen.queryByText('Item 50')).not.toBeInTheDocument();
+    // Wait for the list to appear and check its contents
+    const list = await screen.findByRole("list");
+    const items = await within(list).findAllByRole("listitem");
+
+    expect(loadMoreMock).toHaveBeenCalledOnce();
+    // Due to virtualization (400px container / 80px item), only 5 items should be rendered
+    expect(items.length).toBe(5);
+    expect(within(items[0]).getByText("Item 1")).toBeInTheDocument();
+
+    // Check that the component knows about all 15 items by checking the total height
+    const scrollableContent = screen.getByTestId("scroll-content");
+    expect(scrollableContent.style.height).toBe(`${15 * 80}px`);
+  });
+
+  it("should fetch next page and update scroll height when triggered", async () => {
+    const loadMoreMock = vi.fn()
+      .mockResolvedValueOnce(generateMockItems(15, 1))
+      .mockResolvedValueOnce(generateMockItems(15, 2));
+
+    renderComponent(loadMoreMock);
+
+    // 1. Wait for initial items and get scroll container
+    await screen.findByText("Item 1");
+    const scrollableContent = screen.getByTestId("scroll-content");
+    expect(scrollableContent.style.height).toBe(`${15 * 80}px`);
+
+    // 2. Get the onVisible callback and trigger it
+    const onVisibleCallback = mockIntersectionObserver.mock.calls?.at(-1)?.[0];
+    onVisibleCallback();
+
+    // 3. Wait for the DOM to update first (the most reliable async result)
+    await waitFor(() => {
+      expect(scrollableContent.style.height).toBe(`${30 * 80}px`);
+    });
+
+    // 4. Now that the DOM has updated, assert on the side effects
+    expect(loadMoreMock).toHaveBeenCalledTimes(2);
+    expect(loadMoreMock).toHaveBeenCalledWith(2);
+  });
+
+  it("should display 'No more items' when the last page is reached", async () => {
+    const loadMoreMock = vi.fn()
+      .mockResolvedValueOnce(generateMockItems(15, 1))
+      .mockResolvedValueOnce([]); // Return an empty array for the second page
+
+    renderComponent(loadMoreMock);
+
+    // 1. Wait for initial items
+    await screen.findByText("Item 1");
+
+    // 2. Trigger the fetch for the next (and last) page
+    const onVisibleCallback = mockIntersectionObserver.mock.calls?.at(-1)?.[0];
+    onVisibleCallback();
+
+    // 3. Wait for the "No more items" text to appear
+    await screen.findByText("No more items");
+
+    // 4. Assert that the trigger component is no longer rendered
+    expect(screen.queryByTestId("intersection-trigger")).not.toBeInTheDocument();
+    // And that loadMore was not called a third time
+    expect(loadMoreMock).toHaveBeenCalledTimes(2);
   });
 });

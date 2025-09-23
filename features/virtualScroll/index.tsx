@@ -9,22 +9,21 @@ async function generateItems(
     const items = Array.from({ length: count }, (_, i) => ({
       title: `Item ${count * (page - 1) + i + 1}`,
     }));
-    setTimeout(() => resolve(items), 1000); // Simulate network delay
+    setTimeout(() => resolve(items), 1000);
   });
 }
 
 export default function VirtualScrollFeature() {
-  const loadMore = useCallback(
-    (page: number) => generateItems(10, page),
-    []
-  );
+  const loadmore = useCallback((page: number) => {
+    console.log("load page", page);
+    return generateItems(50000, page);
+  }, []);
   return (
-   
-        <VirtualizedInfiniteScroll
-          className="mt-4 bg-background/10"
-          itemHeight={80}
-          containerHeight={400}
-          loadMore={loadMore}
-        />
+    <VirtualizedInfiniteScroll
+      className="mt-4 bg-background/10"
+      itemHeight={80}
+      containerHeight={400}
+      loadMore={loadmore}
+    />
   );
 }

@@ -92,7 +92,7 @@ export default function CustomScrollbar({
         <div
           ref={thumbRef}
           onPointerDown={onThumbPointerDown}
-          className="w-4 absolute left-1/2 -translate-x-1/2 bg-primary rounded active:bg-primary/70"
+          className="w-4 absolute left-1/2 -translate-x-1/2 bg-primary rounded-full active:bg-primary/70"
           style={{
             height: thumbHeight,
             transform: `translateY(${thumbTop}px)`,

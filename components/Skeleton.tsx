@@ -8,7 +8,7 @@ export function SkeletonButton({ className }: { className?: string }) {
       className={cn(
         buttonVariants({
           variant: "secondary",
-          className: "pointer-events-none w-24 animate-pulse w-24",
+          className: "pointer-events-none w-24 animate-pulse",
         }),
         className
       )}
