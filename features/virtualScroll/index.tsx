@@ -9,7 +9,7 @@ async function generateItems(
     const items = Array.from({ length: count }, (_, i) => ({
       title: `Item ${count * (page - 1) + i + 1}`,
     }));
-    setTimeout(() => resolve(items), 1000);
+    setTimeout(() => resolve(items), 800);
   });
 }
 
