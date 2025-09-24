@@ -1,6 +1,7 @@
 import {
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -17,6 +18,7 @@ export default function FeatureDialog() {
     <DialogContent className="min-w-full h-auto md:min-w-3xl " showCloseButton={false}>
       <DialogHeader>
         <DialogTitle className="text-2xl">{activeFeature?.title}</DialogTitle>
+        <DialogDescription>{activeFeature?.description}</DialogDescription>
         <DialogClose
           className="absolute top-4 right-4 text-muted-foreground"
         >
