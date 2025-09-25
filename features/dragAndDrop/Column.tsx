@@ -1,17 +1,14 @@
 import { SortableContext, useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import Card from "./Card";
+import { Column as ColumnType} from ".";
 
 export default function Column({
   id,
   title,
   items,
-}: {
-  id: string;
-  title: string;
-  items: {id: string, title: string}[];
-}) {
-  const { attributes, listeners, setNodeRef, transform, transition} = useSortable({
+}: ColumnType) {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id,
     data: {
       type: 'column',
@@ -22,6 +19,7 @@ export default function Column({
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
+    opacity: isDragging ? 0.5 : 1,
   };
 
   return (
@@ -33,7 +31,7 @@ export default function Column({
       <div {...attributes} {...listeners} className="cursor-grab active:cursor-grabbing">
         <h2 className="font-bold text-lg">{title}</h2>
       </div>
-      <SortableContext items={items.map(i => i.id)} strategy={verticalListSortingStrategy}>
+      <SortableContext items={items} strategy={verticalListSortingStrategy}>
         <div className="flex flex-col gap-4">
           {items.map((item) => (
             <Card key={item.id} id={item.id} title={item.title} />
