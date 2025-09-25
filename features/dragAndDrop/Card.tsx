@@ -30,7 +30,7 @@ export default function Card({ id, title }: CardType) {
       style={style}
       {...attributes}
       {...listeners}
-      className="bg-white p-4 rounded-lg shadow-sm cursor-grab active:cursor-grabbing"
+      className="p-4 bg-white  dark:text-black rounded-lg shadow-sm cursor-grab active:cursor-grabbing"
     >
       {title}
     </div>

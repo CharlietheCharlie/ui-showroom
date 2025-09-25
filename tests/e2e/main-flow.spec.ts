@@ -11,7 +11,7 @@ test.describe("Main User Flow", () => {
     await expect(page).toHaveTitle("Charlie's UI Showroom");
 
     // 2. Find and click the button for "Feature 2"
-    const featureButton = page.getByText("Feature 2");
+    const featureButton = page.getByText("Drag and Drop");
     await expect(featureButton).toBeVisible();
     await featureButton.click();
 
@@ -21,7 +21,7 @@ test.describe("Main User Flow", () => {
     await expect(dialog).toBeVisible();
 
     // Check for the title within the dialog
-    const dialogTitle = dialog.getByRole("heading", { name: "Feature 2" });
+    const dialogTitle = dialog.getByRole("heading", { name: "Drag and Drop" });
     await expect(dialogTitle).toBeVisible();
 
     // Check for the feature content

@@ -20,11 +20,11 @@
   - button "Open Next.js Dev Tools" [ref=e9] [cursor=pointer]:
     - img [ref=e10] [cursor=pointer]
   - alert
-  - dialog "Drag and Drop" [active] [ref=e14]:
+  - dialog "Drag and Drop" [ref=e14]:
     - generic [ref=e15]:
       - heading "Drag and Drop" [level=2] [ref=e16]
       - paragraph [ref=e17]: Implemented drag and drop functionality, allowing users to reorder elements.
-      - button "close" [ref=e18]
+      - button "close" [active] [ref=e18]
     - generic [ref=e20]:
       - generic [ref=e21]:
         - region "To do" [ref=e22]:
@@ -32,16 +32,15 @@
             - heading "To do" [level=2] [ref=e24]
           - generic [ref=e25]:
             - button "Implement user authentication" [ref=e26]
-            - button "Setup project structure" [ref=e27]
-        - region "In Progress" [ref=e28]:
-          - button "In Progress" [ref=e29]:
-            - heading "In Progress" [level=2] [ref=e30]
-          - button "Develop API for posts" [ref=e32]
-        - region "Done" [ref=e33]:
-          - button "Done" [ref=e34]:
-            - heading "Done" [level=2] [ref=e35]
-          - generic [ref=e36]:
-            - button "Create landing page" [ref=e37]
-            - button "Design database schema" [ref=e38]
-      - status [ref=e39]: Draggable item task-2 was dropped over droppable area task-2
+            - button "Design database schema" [ref=e27]
+            - button "Setup project structure" [ref=e28]
+        - region "In Progress" [ref=e29]:
+          - button "In Progress" [ref=e30]:
+            - heading "In Progress" [level=2] [ref=e31]
+          - button "Develop API for posts" [ref=e33]
+        - region "Done" [ref=e34]:
+          - button "Done" [ref=e35]:
+            - heading "Done" [level=2] [ref=e36]
+          - button "Create landing page" [ref=e38]
+      - status [ref=e39]
 ```
