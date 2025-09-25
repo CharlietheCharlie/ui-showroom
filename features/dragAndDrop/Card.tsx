@@ -1,6 +1,6 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { Card as CardType } from ".";
+import { Card as CardType } from "./types";
 
 export default function Card({ id, title }: CardType) {
   const {

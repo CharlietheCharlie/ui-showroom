@@ -11,21 +11,24 @@ import {
   DragOverlay,
   DropAnimation,
   defaultDropAnimationSideEffects,
-  closestCenter,
   CollisionDetection,
   rectIntersection,
 } from "@dnd-kit/core";
 import {
   SortableContext,
-  arrayMove,
   horizontalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { useState } from "react";
 import { restrictToFirstScrollableAncestor } from "@dnd-kit/modifiers";
 import { createPortal } from "react-dom";
 import Column from "./Column";
-import { Column as ColumnType, Card as CardType } from ".";
+import { Column as ColumnType, Card as CardType } from "./types";
 import Card from "./Card";
+import {
+  moveCardBetweenColumns,
+  reorderCardsInColumn,
+  reorderColumns,
+} from "./utils";
 
 const dropAnimation: DropAnimation = {
   sideEffects: defaultDropAnimationSideEffects({
@@ -105,32 +108,15 @@ export default function Board({ initialData }: { initialData: ColumnType[] }) {
 
     if (active.data.current?.type !== "card") return;
 
-    const { activeColumn, overColumn, activeId, overId } =
-      getActiveAndOverData(event);
+    const { activeColumn, overColumn, activeId } = getActiveAndOverData(event);
 
     if (!activeColumn || !overColumn || activeColumn.id === overColumn.id) {
       return;
     }
 
-    setBoardData((prev) => {
-      const activeItems = [...activeColumn.items];
-      const overItems = [...overColumn.items];
-
-      const activeIndex = activeItems.findIndex((item) => item.id === activeId);
-      const [movedItem] = activeItems.splice(activeIndex, 1);
-
-      overItems.push(movedItem);
-
-      return prev.map((col) => {
-        if (col.id === activeColumn.id) {
-          return { ...col, items: activeItems };
-        }
-        if (col.id === overColumn.id) {
-          return { ...col, items: overItems };
-        }
-        return col;
-      });
-    });
+    setBoardData((prev) =>
+      moveCardBetweenColumns(prev, activeId, activeColumn.id, overColumn.id)
+    );
   };
 
   const handleDragEnd = (event: DragEndEvent) => {
@@ -140,38 +126,18 @@ export default function Board({ initialData }: { initialData: ColumnType[] }) {
 
     if (activeId === overId) return;
 
-    // Reordering columns
+    // reorder columns
     if (active?.type === "column" && overColumn) {
-      setBoardData((prev) => {
-        const oldIndex = prev.findIndex((col) => col.id === activeId);
-        const newIndex = prev.findIndex((col) => col.id === overColumn.id);
-        if (oldIndex === -1 || newIndex === -1) return prev;
-        return arrayMove(prev, oldIndex, newIndex);
-      });
+      setBoardData((prev) => reorderColumns(prev, activeId, overColumn.id));
       return;
     }
 
-    // Reordering cards
-    if (active?.type === "card") {
-      if (activeColumn && overColumn && activeColumn.id === overColumn.id) {
-        setBoardData((prev) => {
-          return prev.map((col) => {
-            if (col.id === activeColumn.id) {
-              const oldIndex = col.items.findIndex(
-                (item) => item.id === activeId
-              );
-              const newIndex = col.items.findIndex(
-                (item) => item.id === overId
-              );
-              if (oldIndex === -1 || newIndex === -1) return col; // safety check
-              return {
-                ...col,
-                items: arrayMove(col.items, oldIndex, newIndex),
-              };
-            }
-            return col;
-          });
-        });
+    // reorder cards
+    if (active?.type === "card" && activeColumn && overColumn) {
+      if (activeColumn.id === overColumn.id) {
+        setBoardData((prev) =>
+          reorderCardsInColumn(prev, activeColumn.id, activeId, overId)
+        );
       }
     }
   };

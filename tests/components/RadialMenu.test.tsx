@@ -32,7 +32,7 @@ describe('RadialMenu and FeatureDialog Integration', () => {
     const user = userEvent.setup(); // Setup userEvent
     render(<RadialMenu />);
 
-    const featureButton = screen.getByText('Virtual Scroll');
+    const featureButton = screen.getByText('Virtualized Infinite Scroll');
     expect(featureButton).toBeInTheDocument();
 
     // Act: Click the button using userEvent
@@ -42,7 +42,7 @@ describe('RadialMenu and FeatureDialog Integration', () => {
     const dialog = await screen.findByRole('dialog');
     expect(dialog).toBeInTheDocument();
 
-    const dialogTitle = await screen.findByRole('heading', { name: 'Virtual Scroll' });
+    const dialogTitle = await screen.findByRole('heading', { name: 'Virtualized Infinite Scroll' });
     expect(dialogTitle).toBeInTheDocument();
 
     const featureContent = await screen.findByText('Mocked Virtual Scroll');
@@ -54,7 +54,7 @@ describe('RadialMenu and FeatureDialog Integration', () => {
     render(<RadialMenu />);
 
     // --- Open the dialog first ---
-    const featureButton = screen.getByText('Feature 2');
+    const featureButton = screen.getByText('Drag and Drop');
     await user.click(featureButton);
 
     // --- Assert it's open ---

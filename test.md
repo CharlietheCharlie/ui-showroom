@@ -1,5 +1,5 @@
-Testing Specification Document
-Objectives
+📄 Testing Specification Document
+🎯 Objectives
 
 Ensure core features remain correct during development and deployment.
 
@@ -7,8 +7,10 @@ Quickly detect issues in UI, state management, and API integration.
 
 Provide a maintainable testing foundation to prevent regressions.
 
-Scope
-1. Unit Tests (Vitest)
+📌 Scope & Responsibilities
+1. Unit Tests → Vitest
+
+Goal: Verify pure logic, fast and precise.
 
 State Management
 
@@ -18,13 +20,17 @@ Pure Functions
 
 Data processing, algorithms, utility functions.
 
-Component Logic
+Component Logic (non-UI)
 
-Props passed correctly.
+Props are passed correctly.
 
 Event handlers trigger the expected updates.
 
-2. Component Tests (Vitest + React Testing Library)
+✅ Focus: No DOM, no UI, no browser. Only logic.
+
+2. Component Tests → Vitest + React Testing Library (RTL)
+
+Goal: Verify UI structure and interaction.
 
 UI Rendering
 
@@ -40,21 +46,33 @@ Conditional Rendering
 
 No active feature → Dialog should not be visible.
 
-Switching between different featureId updates content correctly.
+Switching featureId updates content correctly.
 
-3. End-to-End Tests (Playwright)
+Accessibility
+
+Elements have correct role, aria-label, aria-modal, etc.
+
+✅ Focus: Simulated user interaction with DOM. No navigation or browser-level behavior.
+
+3. End-to-End Tests (E2E) → Playwright
+
+Goal: Verify complete user flows in a real browser environment.
 
 User Flows
 
-User navigates to the homepage → clicks a feature button → modal opens.
+Navigate to homepage → click a feature button → modal opens.
 
-User closes the modal → state resets.
+Close modal → state resets.
 
 UI & Usability
 
-Dialog closes correctly via overlay click, close button, or ESC key.
+Dialog closes via overlay click, close button, or ESC key.
 
-Accessibility attributes (roles, aria labels) exist.
+Styles and overlay behavior are correct (z-index, scroll locking).
+
+Accessibility
+
+Focus trap, keyboard navigation, ARIA attributes validated.
 
 Cross-feature Behavior
 
@@ -62,32 +80,44 @@ Multiple feature buttons open the correct modal content.
 
 Only one modal can be open at a time.
 
-Tooling
+✅ Focus: Realistic user actions, routing, full app state validation.
 
-Vitest → unit and component tests.
+⚙️ Tooling
 
-React Testing Library → simulate user interactions.
+Vitest → Unit tests (logic)
 
-Playwright → end-to-end browser tests.
+RTL (with Vitest) → Component tests (UI + interactions)
 
-Guidelines
+Playwright → End-to-end tests (full user flows)
 
-Directory Structure
-
+📂 Directory Structure
 tests/
   unit/         # Zustand, utils, hooks
-  components/   # React components
-  e2e/          # Playwright
+  components/   # React components with RTL
+  e2e/          # Playwright specs
 
+📝 Guidelines
 
 Naming
 
 Test files end with .test.ts(x) or .spec.ts(x).
 
-Test descriptions (describe, it, test) must be readable and descriptive.
+Test descriptions (describe/it) must be clear and descriptive.
 
 Coverage
 
-Unit test coverage for core logic > 80%.
+Unit test coverage for core logic ≥ 80%.
 
-E2E tests cover main user flows.
+E2E tests must cover main user flows.
+
+📊 Testing Pyramid
+        ▲
+        |   End-to-End (Playwright)
+        |   Few, critical user flows
+        |
+        |   Component (RTL)
+        |   Moderate, DOM-level checks
+        |
+        |   Unit (Vitest)
+        |   Most tests, logic validation
+        ▼

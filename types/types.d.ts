@@ -7,3 +7,5 @@ export type Feature = {
     techStack: string[];
     component: LazyExoticComponent<() => JSX.Element>;
 }
+
+

@@ -1,0 +1,56 @@
+# Page snapshot
+
+```yaml
+- generic:
+  - generic:
+    - button:
+      - generic:
+        - img
+        - generic:
+          - img
+      - generic: Toggle theme
+  - generic:
+    - img:
+      - generic:
+        - generic: About Me
+      - generic:
+        - generic: Virtualized Infinite Scroll
+      - generic:
+        - generic: Drag and Drop
+  - generic [ref=e8] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e9] [cursor=pointer]:
+      - img [ref=e10] [cursor=pointer]
+    - generic [ref=e15] [cursor=pointer]:
+      - button "Open issues overlay" [ref=e16] [cursor=pointer]:
+        - generic [ref=e17] [cursor=pointer]:
+          - generic [ref=e18] [cursor=pointer]: "0"
+          - generic [ref=e19] [cursor=pointer]: "1"
+        - generic [ref=e20] [cursor=pointer]: Issue
+      - button "Collapse issues badge" [ref=e21] [cursor=pointer]:
+        - img [ref=e22] [cursor=pointer]
+  - alert
+  - dialog "Drag and Drop" [active] [ref=e25]:
+    - generic [ref=e26]:
+      - heading "Drag and Drop" [level=2] [ref=e27]
+      - paragraph [ref=e28]: Implemented drag and drop functionality, allowing users to reorder elements.
+      - button "close" [ref=e29]
+    - generic [ref=e31]:
+      - generic [ref=e32]:
+        - region "To do" [ref=e33]:
+          - button "To do" [ref=e34]:
+            - heading "To do" [level=2] [ref=e35]
+          - generic [ref=e36]:
+            - button "Implement user authentication" [ref=e37]
+            - button "Setup project structure" [ref=e38]
+        - region "In Progress" [ref=e39]:
+          - button "In Progress" [ref=e40]:
+            - heading "In Progress" [level=2] [ref=e41]
+          - button "Develop API for posts" [ref=e43]
+        - region "Done" [ref=e44]:
+          - button "Done" [ref=e45]:
+            - heading "Done" [level=2] [ref=e46]
+          - generic [ref=e47]:
+            - button "Create landing page" [ref=e48]
+            - button "Design database schema" [ref=e49]
+      - status [ref=e50]: Draggable item task-2 was dropped over droppable area task-2
+```

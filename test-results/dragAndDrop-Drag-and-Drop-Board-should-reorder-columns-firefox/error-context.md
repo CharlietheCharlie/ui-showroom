@@ -1,0 +1,47 @@
+# Page snapshot
+
+```yaml
+- generic:
+  - generic:
+    - button:
+      - generic:
+        - img
+        - generic:
+          - img
+      - generic: Toggle theme
+  - generic:
+    - img:
+      - generic:
+        - generic: About Me
+      - generic:
+        - generic: Virtualized Infinite Scroll
+      - generic:
+        - generic: Drag and Drop
+  - button "Open Next.js Dev Tools" [ref=e9] [cursor=pointer]:
+    - img [ref=e10] [cursor=pointer]
+  - alert
+  - dialog "Drag and Drop" [active] [ref=e15]:
+    - generic [ref=e16]:
+      - heading "Drag and Drop" [level=2] [ref=e17]
+      - paragraph [ref=e18]: Implemented drag and drop functionality, allowing users to reorder elements.
+      - button "close" [ref=e19]
+    - generic [ref=e21]:
+      - generic [ref=e22]:
+        - region "To do" [ref=e23]:
+          - button "To do" [ref=e24]:
+            - heading "To do" [level=2] [ref=e25]
+          - generic [ref=e26]:
+            - button "Implement user authentication" [ref=e27]
+            - button "Setup project structure" [ref=e28]
+        - region "In Progress" [ref=e29]:
+          - button "In Progress" [ref=e30]:
+            - heading "In Progress" [level=2] [ref=e31]
+          - button "Develop API for posts" [ref=e33]
+        - region "Done" [ref=e34]:
+          - button "Done" [ref=e35]:
+            - heading "Done" [level=2] [ref=e36]
+          - generic [ref=e37]:
+            - button "Create landing page" [ref=e38]
+            - button "Design database schema" [ref=e39]
+      - status [ref=e40]: Draggable item task-2 was dropped over droppable area task-2
+```
