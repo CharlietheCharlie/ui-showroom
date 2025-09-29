@@ -1,8 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# UI Showroom
+
+A Next.js project designed to showcase a collection of modern and interactive UI components, animations, and performance optimizations. This application serves as a demonstration of various front-end techniques and libraries, providing a playground for exploring different UI/UX patterns.
+
+## Features
+
+*   **Dynamic Feature Showcase**: Explore various UI components and features presented dynamically through an interactive dialog.
+*   **Interactive Radial Menu**: Navigate through different showcases using a visually engaging radial menu.
+*   **Drag and Drop Interface**: Demonstrates a Kanban-style board or similar interactive drag-and-drop functionality.
+*   **Virtualized Infinite Scroll**: Showcases efficient rendering of large datasets using virtualization for optimal performance.
+*   **Responsive Design**: Adapts to different screen sizes, with specific features optimized for desktop.
+
+## Technologies Used
+
+*   **Framework**: Next.js 15 (App Router)
+*   **Language**: TypeScript
+*   **Styling**: Tailwind CSS
+*   **Animation**: Framer Motion, GSAP, Three.js, OGL
+*   **Drag and Drop**: `@dnd-kit`
+*   **State Management**: Zustand
+*   **Data Fetching**: `@tanstack/react-query`
+*   **UI Components**: Radix UI, custom components
+*   **Testing**:
+    *   Unit Testing: Vitest, React Testing Library
+    *   End-to-End Testing: Playwright
 
 ## Getting Started
 
-First, run the development server:
+Follow these steps to set up and run the project locally.
+
+### Prerequisites
+
+Make sure you have Node.js (v18 or higher) and npm/yarn/pnpm/bun installed.
+
+### Installation
+
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/your-username/ui-showroom.git
+    cd ui-showroom
+    ```
+2.  Install dependencies:
+    ```bash
+    npm install
+    # or
+    yarn install
+    # or
+    pnpm install
+    # or
+    bun install
+    ```
+
+### Development Server
+
+To run the development server with Turbopack:
 
 ```bash
 npm run dev
@@ -14,23 +64,72 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the result. The application will hot-reload as you make changes.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To build the application for production:
 
-## Learn More
+```bash
+npm run build
+# or
+yarn build
+# or
+pnpm build
+# or
+bun build
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Start Production Server
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To start the production server after building:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run start
+# or
+yarn start
+# or
+pnpm start
+# or
+bun start
+```
 
-## Deploy on Vercel
+## Testing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The project includes both unit and end-to-end tests.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Run Unit Tests
+
+```bash
+npm run test:unit
+# or
+yarn test:unit
+# or
+pnpm test:unit
+# or
+bun test:unit
+```
+
+### Run End-to-End Tests
+
+```bash
+npm run test:e2e
+# or
+yarn test:e2e
+# or
+pnpm test:e2e
+# or
+bun test:e2e
+```
+
+### Run All Tests
+
+```bash
+npm run test
+# or
+yarn test
+# or
+pnpm test
+# or
+bun test
+```

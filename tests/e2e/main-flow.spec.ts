@@ -27,7 +27,7 @@ test.describe("Main User Flow", () => {
     // Check for the feature content
     await expect(
       dialog.getByText(
-        "This is where the complex component for feature two would be rendered."
+        "Implemented drag and drop functionality, allowing users to reorder elements."
       )
     ).toBeVisible();
 
