@@ -4,7 +4,7 @@ export default function AboutMe() {
       <h2>About Me</h2>
       <p>
         {
-          "Hello! I'm Shao Chun Wang, a passionate developer with a love for creating intuitive and dynamic user experiences. I have a background in computer science and have worked on various projects ranging from web applications to mobile apps."
+          "Hello! I'm Charlie Wang, a passionate developer with a love for creating intuitive and dynamic user experiences. I am a frontend developer who have worked on various projects ranging from web applications to mobile apps."
         }
       </p>
       <p>
