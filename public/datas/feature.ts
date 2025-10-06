@@ -25,5 +25,12 @@ export const featuresData: Feature[] = [
     techStack: ["Dnd", "React Query", "Zustand"],
     component: lazy(() => import("@/features/dragAndDrop")),
   },
+  {
+    id: 3,
+    title: "Collaboration Form",
+    description: "Implemented a real-time collaboration form using socket.io. with zod validation",
+    techStack: ["Zod", "React Hook Form", "socket.io"],
+    component: lazy(() => import("@/features/collaborationForm")),
+  },
   
 ];
