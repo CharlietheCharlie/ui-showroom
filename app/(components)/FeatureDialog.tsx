@@ -15,7 +15,7 @@ export default function FeatureDialog() {
   const FeatureComponent = activeFeature?.component;
 
   return (
-    <DialogContent className="min-w-full h-auto md:min-w-3xl " showCloseButton={false}>
+    <DialogContent className="min-w-full max-h-[90vh] overflow-auto md:min-w-3xl " showCloseButton={false}>
       <DialogHeader>
         <DialogTitle className="text-2xl">{activeFeature?.title}</DialogTitle>
         <DialogDescription>{activeFeature?.description}</DialogDescription>

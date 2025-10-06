@@ -1,5 +1,6 @@
+import { ValidatedForm } from "./ValidatedForm";
 
 
 export default function CollaborationForm() {
-    return <div>Collaboration Form</div>;
+    return <ValidatedForm />;
 }
