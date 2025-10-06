@@ -24,10 +24,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { unescape } from "querystring";
 import { DatePicker } from "./DatePicker";
 import { EyeIcon } from "lucide-react";
-import { useId, useState } from "react";
+import { useState } from "react";
 
 // --- Types & Schema ---
 const FullFormSchema = z
@@ -170,7 +169,10 @@ export function ValidatedForm() {
                 <FormLabel>Confirm Password</FormLabel>
                 <FormControl>
                   <div className="relative">
-                    <Input type={showConfirmPassword ? "text" : "password"} {...field} />
+                    <Input
+                      type={showConfirmPassword ? "text" : "password"}
+                      {...field}
+                    />
                     <EyeIcon
                       className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer"
                       onClick={() => {
