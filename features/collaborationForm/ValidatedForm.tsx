@@ -110,7 +110,7 @@ export function ValidatedForm() {
               <FormItem className="flex flex-col align-items-start">
                 <FormLabel>Username</FormLabel>
                 <FormControl>
-                  <Input placeholder="gemini_user" {...field} />
+                  <Input placeholder="please enter username" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -125,7 +125,7 @@ export function ValidatedForm() {
                 <FormControl>
                   <Input
                     type="email"
-                    placeholder="user@google.com"
+                    placeholder="please enter email"
                     {...field}
                   />
                 </FormControl>
