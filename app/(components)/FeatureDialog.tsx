@@ -24,7 +24,7 @@ export default function FeatureDialog() {
         <DialogTitle className="text-2xl">{activeFeature?.title}</DialogTitle>
         <DialogDescription>
           <div>
-            <p className="mb-2">{activeFeature?.description}</p>
+            <span className="mb-2 block">{activeFeature?.description}</span>
            {!!activeFeature?.techStack?.length && (
              activeFeature?.techStack.map((tech) => (
                <Badge key={tech} className="mr-2">{tech}</Badge>
