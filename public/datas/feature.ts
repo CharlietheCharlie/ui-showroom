@@ -27,9 +27,9 @@ export const featuresData: Feature[] = [
   },
   {
     id: 3,
-    title: "Collaboration Form",
-    description: "Implemented a real-time collaboration form using socket.io. with zod validation",
-    techStack: ["Zod", "React Hook Form", "socket.io"],
+    title: "Form Validation",
+    description: "Implemented form with zod validation",
+    techStack: ["Zod", "React Hook Form"],
     component: lazy(() => import("@/features/collaborationForm")),
   },
   
